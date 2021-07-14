@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+
+        <div class="col-md-6">
+            {% if request.user.pk == package.org_id %}
+                <a href="/packages/org/{{request.user.pk}}/">back to your packages</a> &nbsp; &nbsp;&nbsp; &nbsp;
+                <a href="{% url 'org-package-edit' package=package.pk %}"><button class="btn btn-primary">Edit Package</button></a>&nbsp; &nbsp;
+                <a href="{% url 'org-package-delete' package=package.pk %}" onclick="return confirm('Are ou sure to delete?')"><button class="btn btn-danger">Delete Package</button></a>
+
+            {% else %}
+                <a href="/packages/">back to packages</a> &nbsp; &nbsp;
+            {% endif %}
+            <br>
+            <hr>
+
+            <div class="card">
+                <img class="card-img-top" src="/media/{{package.image}}" alt="Card image cap" style="width: 100%;height: 350px;">
+                <div class="card-body">
+                <h3 class="card-title">{{package.title}}</h3>
+                <small>{{package.location}}</small>
+                <br>
+                <small>No of seats availabe : {{package.seats}}</small><br>
+                <small>Last booking date : {{package.date}}</small>
+
+                <p>For more info contact {{package.org.email}}</p>
+                <hr>
+                <p class="card-text">{{package.description}}</p>
+                
+                </div>
+            </div>
+        </div>
+
+</div>
+{% endblock %}

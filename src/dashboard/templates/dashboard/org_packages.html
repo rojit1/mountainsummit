@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content">
+
+    {% for package in data %}
+        <div class="col-md-6 col-lg-3 m-3">
+            <div class="card">
+                <img class="card-img-top" src="/media/{{package.image}}" alt="Card image cap" style="width: 100%;height: 350px;">
+                <div class="card-body">
+                <h3 class="card-title"><a href="/packages/{{package.pk}}">{{package.title}}</a></h3>
+                <small>{{package.location}}</small>
+                <br>
+                <small>No of seats availabe : {{package.seats}}</small>  
+                {% if package.date %}   
+                    <p>Last date to book: <i style="color:rgb(179, 68, 83)">{{package.date}}</i></p>      
+                {% endif %}     
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    
+</div>
+{% endblock %}

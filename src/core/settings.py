@@ -26,10 +26,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django_extensions',
+    'accounts',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'dashboard'
+    'dashboard',
+    'places',
 ]
 
 MIDDLEWARE = [
@@ -129,6 +132,9 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = '/'
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
@@ -141,3 +147,9 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION="mandatory"
+
+ACCOUNT_FORMS = {'signup': 'accounts.forms.UserForm'}
+
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'

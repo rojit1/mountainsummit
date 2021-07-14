@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid p-0 fix">
+    <div class="row">
+        <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6">
+            <h2>Add package</h2>
+            <form method="POST" action="{% url 'add-packages' %}" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="title" placeholder="Enter title of the package" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label>Location/s</label>
+                    <input type="text" class="form-control" name="location" placeholder="Location/s" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label>Seats</label>
+                    <input type="number" class="form-control" name="seats" placeholder="Number of seats" required>
+                </div>
+
+                <br>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" class="form-control" name="date">
+                </div>
+
+                <br>
+                <div class="form-group">
+                    <label>Image</label>
+                    <input type="file" accept=".png,.jpeg,.jpg" class="form-control" name="image">
+                </div>
+
+                <br>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" name="description" id="" cols="30" rows="10" required></textarea>
+                </div>
+               
+                <br>
+
+                <button type="submit" class="btn btn-success">Create</button>
+              </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

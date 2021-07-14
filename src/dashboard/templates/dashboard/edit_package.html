@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid p-0 fix">
+    <div class="row">
+        <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6">
+            <h2>edit package</h2>
+            <form method="POST" action="{% url 'org-package-edit' package=data.pk %}" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                <input type="hidden" name="id" value={{data.pk}}>
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="title" placeholder="Enter title of the package" value="{{data.title}}" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label>Location/s</label>
+                    <input type="text" class="form-control" name="location" placeholder="Location/s" value="{{data.location}}" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label>Seats</label>
+                    <input type="number" class="form-control" name="seats" placeholder="Number of seats" value="{{data.seats}}" required>
+                </div>
+
+                <br>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" class="form-control" name="date">
+                </div>
+
+                <br>
+                <div class="form-group">
+                    <label>Image</label><br>
+                    <img src="/media/{{data.image}}" width="200px" alt="">
+                    <input type="file" accept=".png,.jpeg,.jpg" class="form-control" name="image">
+                </div>
+
+                <br>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" name="description" id="" cols="30" rows="10" required>{{data.description}}</textarea>
+                </div>
+               
+                <br>
+
+                <button type="submit" class="btn btn-warning">Update</button>
+                <a href="/packages/{{package.pk}}/"><button type="submit" class="btn btn-primary">Back</button></a>
+
+              </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

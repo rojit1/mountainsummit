@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content">
+    {% if data %}
+        {% for package in data %}
+            <div class="col-md-6 col-lg-3 m-2">
+                <div class="card">
+                    <img class="card-img-top" src="/media/{{package.image}}" alt="Card image cap" style="width: 100%;height: 350px;">
+                    <div class="card-body">
+                    <h3 class="card-title"><a href="/packages/{{package.pk}}">{{package.title}}</a></h3>
+                    <small>{{package.location}}</small>
+                    <br>
+                    <small>No of seats availabe : {{package.seats}}</small>  
+                    <p>{{package.date}}</p>             
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    {%else%}
+
+    <h1>Sorry No data availabe</h1>
+
+    {% endif %}
+
+    
+</div>
+{% endblock %}
