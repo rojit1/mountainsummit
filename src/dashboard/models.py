@@ -12,6 +12,12 @@ class Package(models.Model):
     image = models.ImageField(upload_to="packages/", null=True,blank=True)
     org = models.ForeignKey(User, on_delete=models.CASCADE)
 
-
     def __str__(self):
         return self.title
+
+class Book(models.Model):
+    package = models.ForeignKey(Package, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.package.title+' booked by '+ self.user.email

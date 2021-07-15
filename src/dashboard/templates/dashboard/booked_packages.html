@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .icons i {
+    color: #b5b3b3;
+    border: 1px solid #b5b3b3;
+    padding: 6px;
+    margin-left: 4px;
+    border-radius: 5px;
+    cursor: pointer
+}
+
+.activity-done {
+    font-weight: 600
+}
+
+.list-group li {
+    margin-bottom: 12px
+}
+
+
+.list li {
+    list-style: none;
+    padding: 10px;
+    border: 1px solid #e3dada;
+    margin-top: 12px;
+    border-radius: 5px;
+    background: #fff
+}
+
+
+</style>
+
+
+<div class="row justify-content">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mt-3">
+                    {% if packages %}
+                    {% for package in packages %}
+                        <ul class="list list-inline">
+                            <li class="d-flex justify-content-between">
+                                <div class="d-flex flex-row align-items-center">
+                                    <div class="ml-2">
+                                        <a href="{% url 'package-details' id=package.package.pk %}"><h4 class="mb-0">{{package.package.title}}</h4></a>
+                                        <div class="d-flex flex-row mt-1 text-black-100 date-time">
+                                            <p>Destination: {{package.package.location}}</p>
+                                        </div>
+                                        <p>Contact info : {{package.user.email}}</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row align-items-center">
+                                    <div class="d-flex flex-column mr-2">
+                                        <p>Date {{package.package.date}}</p>
+                                    </div> 
+                                </div>
+                            </li>
+                        </ul>
+                    {% endfor %}
+                    {% else %}
+                    <h1>No booked packages</h1>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -54,6 +54,12 @@ class Profile(models.Model):
     firstname = models.CharField(max_length=100, null=True, blank=True)
     lastname = models.CharField(max_length=100, null=True, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
+    phone = models.CharField(max_length=15,blank=True,null=True)
+    website = models.CharField(max_length=100,blank=True,null=True)
 
     def __str__(self):
-        return self.name
+        if self.name:
+            return self.name
+        if self.firstname and self.lastname:
+            return self.firstname+' '+self.lastname
+        return self.user.email

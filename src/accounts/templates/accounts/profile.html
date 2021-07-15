@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    {% if data %}
+       
+
+
+
+
+
+    <div class="page-content page-container" id="page-content">
+        <div class="padding">
+            <div class="row container d-flex justify-content-center">
+                <div class="col-xl-8 col-md-12">
+                    <div class="card user-card-full" style="padding: 30px;">
+                        <div class="row m-l-0 m-r-0">
+                            <div class="col-sm-4 bg-c-lite-green user-profile">
+                                <div class="card-block text-center text-white">
+                                    <div class="m-b-25"> <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"> </div>
+                                    <h6 class="f-w-600">Hembo Tingor</h6>
+                                    <p>Web Designer</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="card-block">
+                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">Email</p>
+                                            <h6 class="text-muted f-w-400">{{request.user.email}}</h6>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">Phone</p>
+                                            <h6 class="text-muted f-w-400">{{data.phone}}</h6>
+                                        </div>
+                                    </div>
+                                    
+                                    <br>
+
+                                    <div class="row">
+
+                                        {% if request.user.type == 'ORGANIZATION' %}
+
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">Organization Name</p>
+                                            <h6 class="text-muted f-w-400">{{data.name}}</h6>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">Website URL</p>
+                                            <h6 class="text-muted f-w-400">{{data.website}}</h6>
+                                        </div>
+                                    
+                                        {% else %}
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">Firstname</p>
+                                                <h6 class="text-muted f-w-400">{{data.firstname}}</h6>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">Lastname</p>
+                                                <h6 class="text-muted f-w-400">{{data.lastname}}</h6>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <br>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">Address</p>
+                                            <h6 class="text-muted f-w-400">{{data.address}}</h6>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <a href="{% url 'update-profile' %}"><button class="btn btn-success">Update profile</button></a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% else %}
+        <h2>You have not Created your profile yet.</h2>
+        <a href="{% url 'create-profile' %}"><button class="btn btn-primary">Create Profile</button></a>
+    {% endif %}
+
+{% endblock %}

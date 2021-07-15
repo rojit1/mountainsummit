@@ -2,11 +2,18 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
-from .models import Package
+from .models import Package, Book
 
-
+"""
+Default home page
+"""
 def home(request):
     return render(request, 'dashboard/home.html')
+
+
+"""
+Package section
+"""
 
 @login_required
 def add_packages(request):
@@ -19,7 +26,7 @@ def add_packages(request):
         data = request.POST
         file = request.FILES.get('image','')
         Package.objects.create(title=data['title'],location=data['location'], seats=data['seats'],image=file,date=data.get('date',''),description=data['description'],org_id = request.user.pk)
-        return HttpResponse("You didnit")
+        return redirect('org-packages',org=request.user.pk)
 
 def all_packages(request):
     data = Package.objects.all();
@@ -27,7 +34,8 @@ def all_packages(request):
 
 def package_details(request, id):
     data = get_object_or_404(Package,pk=id)
-    return render(request, 'dashboard/package_details.html',{'package':data})
+    user_packages = [ item.package.pk for item in Book.objects.filter(user=request.user,package_id=id)]
+    return render(request, 'dashboard/package_details.html',{'package':data,'user_packages':user_packages})
 
 @login_required
 def org_packages(request, org):
@@ -68,3 +76,28 @@ def org_package_delete(request, package):
         return redirect('org-packages',org=request.user.pk)
     return redirect('/')
 
+
+
+"""
+Booking section
+"""
+@login_required
+def book_package(request, package_id):
+    if request.user.type == 'USER':
+        package = get_object_or_404(Package,pk=package_id)
+        Book.objects.create(user=request.user, package=package)
+        return redirect('package-details',id=package_id)
+    return redirect('/')
+
+@login_required
+def cancel_package(request, package_id):
+    if request.user.type == 'USER':
+        package = get_object_or_404(Package,pk=package_id)
+        Book.objects.filter(user=request.user, package=package).delete()
+        return redirect('package-details',id=package_id)
+    return redirect('/')
+
+@login_required
+def booked_packages(request):
+    packages = Book.objects.filter(user=request.user)
+    return render(request,'dashboard/booked_packages.html',{'packages':packages})

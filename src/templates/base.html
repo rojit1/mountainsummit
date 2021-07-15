@@ -44,6 +44,8 @@
                             {% if request.user.type == 'USER' %}
                                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'places' %}">places</a></li>
                                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'packages' %}">Packages</a></li>
+                                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'booked-packages' %}">Booked</a></li>
+
                             {% endif %}
 
 
@@ -60,6 +62,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/accounts/logout/">Report a problem</a>
+                                    <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
                                     <a class="dropdown-item" href="/accounts/logout/">Logout</a>
                                 </div>
                             </li>
